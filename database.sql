@@ -156,10 +156,12 @@ CREATE TABLE blogs (
 
 CREATE TABLE program_modules (
     module_id bigint REFERENCES modules (id) NOT NULL,
-    program_id bigint REFERENCES programs (id) NOT NULL
+    program_id bigint REFERENCES programs (id) NOT NULL,
+    PRIMARY KEY (module_id, program_id)
 );
 
 CREATE TABLE course_modules (
     course_id bigint REFERENCES courses (id) NOT NULL,
-    module_id bigint REFERENCES modules (id) NOT NULL
+    module_id bigint REFERENCES modules (id) NOT NULL,
+    PRIMARY KEY (course_id, module_id)
 );
