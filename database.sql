@@ -28,11 +28,11 @@ CREATE TABLE lessons (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     name varchar(255) NOT NULL,
     content text NOT NULL,
-    video_url varchar(255) NOT NULL,
-    position bigint NOT NULL,
+    video_url varchar(255),
+    position bigint,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL,
-    course_id bigint REFERENCES courses (id) NOT NULL,
+    course_id bigint REFERENCES courses (id),
     deleted_at boolean default false NOT NULL
 );
 
