@@ -55,7 +55,7 @@ CREATE TABLE programs (
 );
 
 CREATE TABLE teaching_groups (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     slug VARCHAR(255) NOT NULL UNIQUE,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
