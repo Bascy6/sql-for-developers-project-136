@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS certificates;
 DROP TABLE IF EXISTS quizzes;
 DROP TABLE IF EXISTS exercises;
 DROP TABLE IF EXISTS discussions;
-DROP TABLE IF EXISTS blog;
+DROP TABLE IF EXISTS blogs;
 DROP TABLE IF EXISTS program_modules;
 DROP TABLE IF EXISTS course_modules;
 
@@ -143,11 +143,11 @@ CREATE TABLE discussions (
     updated_at timestamp NOT NULL
 );
 
-CREATE TABLE blog (
+CREATE TABLE blogs (
     id bigint PRIMARY KEY NOT NULL,
     user_id bigint REFERENCES users (id) NOT NULL,
     content text NOT NULL,
-    title varchar(255) NOT NULL,
+    name varchar(255) NOT NULL,
     status varchar(50) CHECK
         (status IN ('created', 'in moderation', 'published', 'archived')) NOT NULL,
     created_at timestamp NOT NULL,
