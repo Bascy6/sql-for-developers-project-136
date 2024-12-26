@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS program_modules;
 DROP TABLE IF EXISTS course_modules;
 
 CREATE TABLE courses (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     name varchar(255) NOT NULL,
     description text NOT NULL,
     created_at timestamp NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE courses (
 );
 
 CREATE TABLE lessons (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     name varchar(255) NOT NULL,
     content text NOT NULL,
     video_url varchar(255) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE lessons (
 );
 
 CREATE TABLE modules (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     name varchar(255) NOT NULL,
     description text NOT NULL,
     created_at timestamp NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE modules (
 );
 
 CREATE TABLE programs (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     name varchar(255) NOT NULL,
     price int NOT NULL,
     program_type varchar(255) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE teaching_groups (
 );
 
 CREATE TABLE users (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     name varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     password_hash varchar(255) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE enrollments (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     user_id bigint REFERENCES users (id) NOT NULL,
     program_id bigint REFERENCES programs (id) NOT NULL,
     status varchar(50) CHECK
