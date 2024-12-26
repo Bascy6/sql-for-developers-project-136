@@ -89,7 +89,7 @@ CREATE TABLE enrollments (
 );
 
 CREATE TABLE payments (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     enrollment_id bigint REFERENCES enrollments (id) NOT NULL,
     amount int NOT NULL,
     status varchar(50) CHECK
@@ -100,7 +100,7 @@ CREATE TABLE payments (
 );
 
 CREATE TABLE program_completions (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     user_id bigint REFERENCES users (id) NOT NULL,
     program_id bigint REFERENCES programs (id) NOT NULL,
     status varchar(50) CHECK
@@ -112,7 +112,7 @@ CREATE TABLE program_completions (
 );
 
 CREATE TABLE certificates (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     user_id bigint REFERENCES users (id) NOT NULL,
     program_id bigint REFERENCES programs (id) NOT NULL,
     url varchar(255) NOT NULL,
@@ -122,7 +122,7 @@ CREATE TABLE certificates (
 );
 
 CREATE TABLE quizzes (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     lesson_id bigint REFERENCES lessons (id) NOT NULL,
     name varchar(255) NOT NULL,
     content text,
@@ -131,7 +131,7 @@ CREATE TABLE quizzes (
 );
 
 CREATE TABLE exercises (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     lesson_id bigint REFERENCES lessons (id) NOT NULL,
     name varchar(255) NOT NULL,
     url varchar(255) NOT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE exercises (
 );
 
 CREATE TABLE discussions (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     user_id bigint REFERENCES users (id) NOT NULL,
     lesson_id bigint REFERENCES lessons (id) NOT NULL,
     text text NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE discussions (
 );
 
 CREATE TABLE blogs (
-    id bigint PRIMARY KEY NOT NULL,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
     user_id bigint REFERENCES users (id) NOT NULL,
     content text NOT NULL,
     name varchar(255) NOT NULL,
