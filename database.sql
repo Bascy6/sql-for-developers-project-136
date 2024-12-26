@@ -32,10 +32,13 @@ CREATE TABLE lessons (
     position bigint,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL,
+    course_id bigint NOT NULL,
+    deleted_at boolean default false NOT NULL,
     CONSTRAINT fk_course
         FOREIGN KEY (course_id)
-        REFERENCES courses(id)б
-    deleted_at boolean default false NOT NULL
+        REFERENCES courses(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE modules (
