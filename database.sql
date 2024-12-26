@@ -32,7 +32,9 @@ CREATE TABLE lessons (
     position bigint,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL,
-    course_id bigint REFERENCES courses (id),
+    CONSTRAINT fk_course
+        FOREIGN KEY (course_id)
+        REFERENCES courses(id)б
     deleted_at boolean default false NOT NULL
 );
 
