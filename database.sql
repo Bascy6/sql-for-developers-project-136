@@ -19,7 +19,7 @@ CREATE TABLE courses (
     description text NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL,
-    is_deleted tinyint default 0  NOT NULL
+    is_deleted boolean default false NOT NULL
 );
 
 CREATE TABLE lessons (
@@ -31,7 +31,7 @@ CREATE TABLE lessons (
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL,
     course_id bigint REFERENCES courses (id) NOT NULL,
-    is_deleted tinyint default 0 NOT NULL
+    is_deleted boolean default false NOT NULL
 );
 
 CREATE TABLE modules (
@@ -40,7 +40,7 @@ CREATE TABLE modules (
     description text NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL,
-    is_deleted tinyint default 0 NOT NULL
+    is_deleted boolean default false NOT NULL
 );
 
 CREATE TABLE programs (
@@ -74,7 +74,7 @@ CREATE TABLE enrollments (
     id bigint PRIMARY KEY NOT NULL,
     user_id bigint REFERENCES users (id) NOT NULL,
     program_id bigint REFERENCES programs (id) NOT NULL,
-    status varchar(50) CHECK 
+    status varchar(50) CHECK
         (status IN ('active', 'pending', 'cancelled', 'completed')) NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
@@ -84,9 +84,9 @@ CREATE TABLE payments (
     id bigint PRIMARY KEY NOT NULL,
     enrollment_id bigint REFERENCES enrollments (id) NOT NULL,
     amount int NOT NULL,
-    status varchar(50) CHECK 
+    status varchar(50) CHECK
         (status IN ('pending', 'paid', 'failed', 'refunded')) NOT NULL,
-    payment_date timestamp NOT NULL,    
+    payment_date timestamp NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
 );
@@ -95,10 +95,10 @@ CREATE TABLE program_completions (
     id bigint PRIMARY KEY NOT NULL,
     user_id bigint REFERENCES users (id) NOT NULL,
     program_id bigint REFERENCES programs (id) NOT NULL,
-    status varchar(50) CHECK 
+    status varchar(50) CHECK
         (status IN ('active', 'completed', 'pending', 'cancelled')) NOT NULL,
-    starts_program_date timestamp NOT NULL, 
-    finish_program_date timestamp NOT NULL,    
+    starts_program_date timestamp NOT NULL,
+    finish_program_date timestamp NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
 );
@@ -108,7 +108,7 @@ CREATE TABLE certificates (
     user_id bigint REFERENCES users (id) NOT NULL,
     program_id bigint REFERENCES programs (id) NOT NULL,
     url varchar(255) NOT NULL,
-    issue_date timestamp NOT NULL,    
+    issue_date timestamp NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
 );
@@ -117,7 +117,7 @@ CREATE TABLE quizzes (
     id bigint PRIMARY KEY NOT NULL,
     lesson_id bigint REFERENCES lessons (id) NOT NULL,
     name varchar(255) NOT NULL,
-    content text,   
+    content text,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
 );
@@ -126,8 +126,8 @@ CREATE TABLE exercises (
     id bigint PRIMARY KEY NOT NULL,
     lesson_id bigint REFERENCES lessons (id) NOT NULL,
     name varchar(255) NOT NULL,
-    content text, 
-    url varchar(255) NOT NULL,  
+    content text,
+    url varchar(255) NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
 );
@@ -135,17 +135,17 @@ CREATE TABLE exercises (
 CREATE TABLE discussions (
     id bigint PRIMARY KEY NOT NULL,
     lesson_id bigint REFERENCES lessons (id) NOT NULL,
-    text text,   
+    text text,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
 );
 
 CREATE TABLE blog (
     id bigint PRIMARY KEY NOT NULL,
-    student_id bigint REFERENCES students (id) NOT NULL,
+    user_id bigint REFERENCES users (id) NOT NULL,
     text text NOT NULL,
     title varchar(255) NOT NULL,
-    status varchar(50) CHECK 
+    status varchar(50) CHECK
         (status IN ('created', 'in moderation', 'published', 'archived')) NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
