@@ -71,7 +71,7 @@ CREATE TABLE users (
     name varchar(255) NOT NULL,
     email varchar(255) NOT NULL UNIQUE,
     password_hash varchar(255),
-    teaching_group_id bigint REFERENCES teaching_groups (id) NOT NULL,
+    teaching_group_id varchar(255) REFERENCES teaching_groups (slug) NOT NULL,
     role varchar(50) CHECK (role IN ('student', 'teacher', 'admin')) NOT NULL,
     deleted_at boolean default false NOT NULL,
     created_at timestamp NOT NULL,
