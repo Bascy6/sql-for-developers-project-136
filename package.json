@@ -1,0 +1,6 @@
+{
+    "scripts": {
+      "migrate": "knex migrate:latest",
+      "test": "npm run migrate && jest"
+    }
+  }
