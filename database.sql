@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS quizzes;
 DROP TABLE IF EXISTS exercises;
 DROP TABLE IF EXISTS discussions;
 DROP TABLE IF EXISTS blog;
+DROP TABLE IF EXISTS program_modules;
+DROP TABLE IF EXISTS course_modules;
 
 CREATE TABLE courses (
     id bigint PRIMARY KEY NOT NULL,
@@ -127,7 +129,6 @@ CREATE TABLE exercises (
     id bigint PRIMARY KEY NOT NULL,
     lesson_id bigint REFERENCES lessons (id) NOT NULL,
     name varchar(255) NOT NULL,
-    content text,
     url varchar(255) NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
@@ -145,10 +146,20 @@ CREATE TABLE discussions (
 CREATE TABLE blog (
     id bigint PRIMARY KEY NOT NULL,
     user_id bigint REFERENCES users (id) NOT NULL,
-    text text NOT NULL,
+    content text NOT NULL,
     title varchar(255) NOT NULL,
     status varchar(50) CHECK
         (status IN ('created', 'in moderation', 'published', 'archived')) NOT NULL,
     created_at timestamp NOT NULL,
     updated_at timestamp NOT NULL
+);
+
+CREATE TABLE program_modules (
+    module_id bigint REFERENCES modules (id) NOT NULL,
+    program_id bigint REFERENCES programs (id) NOT NULL
+);
+
+CREATE TABLE course_modules (
+    course_id bigint REFERENCES courses (id) NOT NULL,
+    module_id bigint REFERENCES modules (id) NOT NULL
 );
